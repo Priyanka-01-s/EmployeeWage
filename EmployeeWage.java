@@ -1,18 +1,14 @@
 package Assgn2;
 
-public class EmployeeWage {
+import java.util.Random;
 
+class Employee {
+    public static final int ABSENT = 0;
+    public static final int PART_TIME = 1;
+    public static final int FULL_TIME = 2;
 
-    private static final int WAGE_PER_HOUR = 20;
-    private static final int FULL_DAY_HOUR = 8;
-    private static final int PART_TIME_HOUR = 4;
-    private static final int WORKING_DAYS_PER_MONTH = 20;
-
-    private static final int ABSENT = 0;
-    private static final int PART_TIME = 1;
-    private static final int FULL_TIME = 2;
-
-    public static int getEmployeeType() {
+    // Class method to get the type of employee for the day
+    static int getEmployeeType() {
         double randomNumber = Math.random();
         if (randomNumber < 0.2)
             return ABSENT;
@@ -20,35 +16,47 @@ public class EmployeeWage {
             return PART_TIME;
         else
             return FULL_TIME;
-
     }
+}
 
-    public static int calculateDailyWage(int hours) {
+class EmployeeWageCalculator {
+    private static final int WAGE_PER_HOUR = 20;
+    private static final int FULL_DAY_HOUR = 8;
+    private static final int PART_TIME_HOUR = 4;
+    private static final int WORKING_DAYS_PER_MONTH = 20;
+
+    // Class method to calculate daily wage based on hours
+    private static int calculateDailyWage(int hours) {
         return WAGE_PER_HOUR * hours;
     }
-    public static void main(String[] args) {
-        System.out.println("Welcome to Employee Wage Computation Program");
 
+    // Class method to calculate total wage for the month
+    static int calculateTotalWage() {
         int totalWage = 0;
         for (int day = 0; day < WORKING_DAYS_PER_MONTH; day++) {
-            int employeeType = getEmployeeType();
+            int employeeType = Employee.getEmployeeType();
             switch (employeeType) {
-                case ABSENT:
+                case Employee.ABSENT:
                     System.out.println("Day " + (day + 1) + ": Employee is Absent");
                     break;
-                case PART_TIME:
+                case Employee.PART_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Part-time");
                     totalWage += calculateDailyWage(PART_TIME_HOUR);
                     break;
-                case FULL_TIME:
+                case Employee.FULL_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Full-time");
                     totalWage += calculateDailyWage(FULL_DAY_HOUR);
                     break;
             }
         }
+        return totalWage;
+    }
+}
 
+public class EmployeeWage {
+    public static void main(String[] args) {
+        System.out.println("Welcome to Employee Wage Computation Program");
+        int totalWage = EmployeeWageCalculator.calculateTotalWage();
         System.out.println("Total Wage for the Month: " + totalWage);
     }
-
-    
 }
