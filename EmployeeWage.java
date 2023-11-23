@@ -1,5 +1,3 @@
-//package Assgn2;
-
 package Assgn2;
 
 public class EmployeeWage {
