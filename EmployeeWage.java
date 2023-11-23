@@ -20,20 +20,19 @@ class Employee {
 }
 
 class EmployeeWageCalculator {
-    private static final int WAGE_PER_HOUR = 20;
-    private static final int FULL_DAY_HOUR = 8;
-    private static final int PART_TIME_HOUR = 4;
-    private static final int WORKING_DAYS_PER_MONTH = 20;
+    // private static final int WAGE_PER_HOUR = 20;
+    // private static final int FULL_DAY_HOUR = 8;
+    // private static final int PART_TIME_HOUR = 4;
+    // private static final int WORKING_DAYS_PER_MONTH = 20;
 
-    // Class method to calculate daily wage based on hours
-    private static int calculateDailyWage(int hours) {
-        return WAGE_PER_HOUR * hours;
+    private static int calculateDailyWage(int wagePerHour, int hours) {
+        return wagePerHour * hours;
     }
 
-    // Class method to calculate total wage for the month
-    static int calculateTotalWage() {
+    static int calculateTotalWage(String companyName, int wagePerHour, int fullDayHour, int partTimeHour, int workingDaysPerMonth) {
         int totalWage = 0;
-        for (int day = 0; day < WORKING_DAYS_PER_MONTH; day++) {
+        System.out.println("Calculating wages for " + companyName);
+        for (int day = 0; day < workingDaysPerMonth; day++) {
             int employeeType = Employee.getEmployeeType();
             switch (employeeType) {
                 case Employee.ABSENT:
@@ -41,11 +40,11 @@ class EmployeeWageCalculator {
                     break;
                 case Employee.PART_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Part-time");
-                    totalWage += calculateDailyWage(PART_TIME_HOUR);
+                    totalWage += calculateDailyWage(wagePerHour,partTimeHour);
                     break;
                 case Employee.FULL_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Full-time");
-                    totalWage += calculateDailyWage(FULL_DAY_HOUR);
+                    totalWage += calculateDailyWage(wagePerHour,fullDayHour);
                     break;
             }
         }
@@ -56,7 +55,25 @@ class EmployeeWageCalculator {
 public class EmployeeWage {
     public static void main(String[] args) {
         System.out.println("Welcome to Employee Wage Computation Program");
-        int totalWage = EmployeeWageCalculator.calculateTotalWage();
-        System.out.println("Total Wage for the Month: " + totalWage);
+        String company1 = "Company1";
+        int wagePerHour1 = 25;
+        int fullDayHour1 = 8;
+        int partTimeHour1 = 4;
+        int workingDaysPerMonth1 = 20;
+
+        // Calculate and display total wage for Company 1
+        int totalWage1 = EmployeeWageCalculator.calculateTotalWage(company1, wagePerHour1, fullDayHour1, partTimeHour1, workingDaysPerMonth1);
+        System.out.println("Total Wage for " + company1 + ": " + totalWage1);
+
+        // Define parameters for Company 2
+        String company2 = "Company2";
+        int wagePerHour2 = 22;
+        int fullDayHour2 = 7;
+        int partTimeHour2 = 3;
+        int workingDaysPerMonth2 = 25;
+
+        // Calculate and display total wage for Company 2
+        int totalWage2 = EmployeeWageCalculator.calculateTotalWage(company2, wagePerHour2, fullDayHour2, partTimeHour2, workingDaysPerMonth2);
+        System.out.println("Total Wage for " + company2 + ": " + totalWage2);
     }
 }
