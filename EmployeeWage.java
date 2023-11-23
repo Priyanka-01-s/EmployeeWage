@@ -1,53 +1,5 @@
 package Assgn2;
 
-// public class EmployeeWage {
-
-//     private static final double WAGE_PER_HOUR = 20.0;
-//     private static final int FULL_DAY_HOURS = 8;
-//     private static final int PART_TIME_HOURS = 4;
-//     private static final int MAX_DAYS = 20;
-//     private static final int MAX_HOURS = 100;
-
-//     private static double calculateDailyWage(int hoursWorked) {
-//         double dailyWage;
-
-//         switch (hoursWorked) {
-//             case FULL_DAY_HOURS:
-//                 dailyWage = FULL_DAY_HOURS * WAGE_PER_HOUR;
-//                 break;
-//             case PART_TIME_HOURS:
-//                 dailyWage = PART_TIME_HOURS * WAGE_PER_HOUR;
-//                 break;
-//             default:
-//                 System.out.println("Invalid hours worked.");
-//                 dailyWage = 0.0;
-//         }
-
-//         return dailyWage;
-//     }
-
-//     public static void main(String[] args) {
-//         System.out.println("Welcome to Employee Wage Computation Program");
-
-//         int totalDays = 0;
-//         int totalHours = 0;
-//         double totalWage = 0.0;
-
-//         while (totalDays < MAX_DAYS || totalHours < MAX_HOURS) {
-//             int hoursWorked = FULL_DAY_HOURS; // Assuming full-time hours for simplicity
-//             totalDays++;
-//             totalHours += hoursWorked;
-//             totalWage += calculateDailyWage(hoursWorked);
-//         }
-
-//         // If total hours exceed 100, adjust total wage
-//         if (totalHours > MAX_HOURS) {
-//             totalWage -= calculateDailyWage(totalHours - MAX_HOURS);
-//         }
-
-//         System.out.println("Total Wage for exactly " + totalDays + " days or " + totalHours + " hours: $" + totalWage);
-//     }
-// }
 public class EmployeeWage {
 
     private static final int WAGE_PER_HOUR = 20;
