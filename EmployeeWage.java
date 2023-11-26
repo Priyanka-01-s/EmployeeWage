@@ -1,6 +1,5 @@
 package Assgn2;
 
-import java.util.Random;
 
 class Employee {
     public static final int ABSENT = 0;
@@ -8,7 +7,7 @@ class Employee {
     public static final int FULL_TIME = 2;
 
     // Class method to get the type of employee for the day
-    static int getEmployeeType() {
+    static int getEmployeeAttendance() {
         double randomNumber = Math.random();
         if (randomNumber < 0.2)
             return ABSENT;
@@ -17,6 +16,42 @@ class Employee {
         else
             return FULL_TIME;
     }
+}
+
+class CompanyDetails{
+    private String companyName;
+    private int wagePerHour;
+    private int fullDayHours;
+    private int partTimeHours;
+    private int workingDaysPerMonth;
+    
+    //parameterised constructor (for instance variable )
+    public CompanyDetails(String companyName,int wagePerHour,int fullDayHours,int partTimeHours,int workingDaysPerMonth){
+        this.companyName= companyName;
+        this.wagePerHour= wagePerHour;
+        this.fullDayHours= fullDayHours;
+        this.partTimeHours= partTimeHours;
+        this.workingDaysPerMonth= workingDaysPerMonth;
+    }
+
+    public String getCompanyName(){
+        return companyName;
+    }
+
+    public int getWagePerHour(){
+        return wagePerHour;
+    }
+    public int getFullDayHours(){
+        return fullDayHours;
+    }
+    public int getPartTimeHours(){
+        return partTimeHours;
+    }
+    public int getWorkingDaysPerMonth(){
+        return workingDaysPerMonth;
+    }
+
+
 }
 
 class EmployeeWageCalculator {
@@ -29,24 +64,27 @@ class EmployeeWageCalculator {
         return wagePerHour * hours;
     }
 
-    static int calculateTotalWage(String companyName, int wagePerHour, int fullDayHour, int partTimeHour, int workingDaysPerMonth) {
+    static int calculateTotalWage(CompanyDetails details) {
         int totalWage = 0;
-        System.out.println("Calculating wages for " + companyName);
-        for (int day = 0; day < workingDaysPerMonth; day++) {
-            int employeeType = Employee.getEmployeeType();
+        System.out.println("Calculating wages for " + details.getCompanyName());
+        for (int day = 0; day < details.getWorkingDaysPerMonth(); day++) {
+            int employeeType = Employee.getEmployeeAttendance();
             switch (employeeType) {
                 case Employee.ABSENT:
-                    System.out.println("Day " + (day + 1) + ": Employee is Absent");
+                    System.out.println("Day " + (day + 1) + ": Employee is Absent for" + details.getCompanyName());
                     break;
                 case Employee.PART_TIME:
-                    System.out.println("Day " + (day + 1) + ": Employee is Part-time");
-                    totalWage += calculateDailyWage(wagePerHour,partTimeHour);
+                    System.out.println("Day " + (day + 1) + ": Employee is Part-time for "+ details.getCompanyName());
+                    totalWage += calculateDailyWage(details.getWagePerHour(),details.getPartTimeHours());
+                    //System.out.println("Wage of that day :"+calculateDailyWage(details.getWagePerHour(),details.getPartTimeHours()));
                     break;
                 case Employee.FULL_TIME:
-                    System.out.println("Day " + (day + 1) + ": Employee is Full-time");
-                    totalWage += calculateDailyWage(wagePerHour,fullDayHour);
+                    System.out.println("Day " + (day + 1) + ": Employee is Full-time  "+details.getCompanyName());
+                    totalWage += calculateDailyWage(details.getWagePerHour(),details.getFullDayHours());
+                    //System.out.println("Wage of that day :"+calculateDailyWage(details.getWagePerHour(),details.getFullDayHours()));
                     break;
             }
+            System.out.println("\nTotal amount till the day :"+ totalWage);
         }
         return totalWage;
     }
@@ -62,8 +100,10 @@ public class EmployeeWage {
         int workingDaysPerMonth1 = 20;
 
         // Calculate and display total wage for Company 1
-        int totalWage1 = EmployeeWageCalculator.calculateTotalWage(company1, wagePerHour1, fullDayHour1, partTimeHour1, workingDaysPerMonth1);
-        System.out.println("Total Wage for " + company1 + ": " + totalWage1);
+        CompanyDetails companyDetails = new CompanyDetails(company1, wagePerHour1, fullDayHour1, partTimeHour1, workingDaysPerMonth1);
+        EmployeeWageCalculator.calculateTotalWage(companyDetails);
+        //int totalWage1 = EmployeeWageCalculator.calculateTotalWage(company1, wagePerHour1, fullDayHour1, partTimeHour1, workingDaysPerMonth1);
+        //System.out.println("Total Wage for " + company1 + ": " + totalWage1);
 
         // Define parameters for Company 2
         String company2 = "Company2";
@@ -73,7 +113,9 @@ public class EmployeeWage {
         int workingDaysPerMonth2 = 25;
 
         // Calculate and display total wage for Company 2
-        int totalWage2 = EmployeeWageCalculator.calculateTotalWage(company2, wagePerHour2, fullDayHour2, partTimeHour2, workingDaysPerMonth2);
-        System.out.println("Total Wage for " + company2 + ": " + totalWage2);
+        CompanyDetails companyDetails2 = new CompanyDetails(company2, wagePerHour2, fullDayHour2, partTimeHour2, workingDaysPerMonth2);
+        EmployeeWageCalculator.calculateTotalWage(companyDetails2);
+        
+        //System.out.println("Total Wage for " + company2 + ": " + totalWage2);
     }
 }
