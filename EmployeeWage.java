@@ -108,19 +108,17 @@ class EmployeeWageCalculator implements EmployeeWageCalculatorInterface{
                 case Employee.PART_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Part-time for " + details.getCompanyName());
                     totalWage += calculateDailyWage(details.getWagePerHour(), details.getPartTimeHours());
-                    // System.out.println("Wage of that day
-                    // :"+calculateDailyWage(details.getWagePerHour(),details.getPartTimeHours()));
+                    System.out.println("Wage of that day : $"+calculateDailyWage(details.getWagePerHour(),details.getPartTimeHours()));
                     break;
                 case Employee.FULL_TIME:
                     System.out.println("Day " + (day + 1) + ": Employee is Full-time  " + details.getCompanyName());
                     totalWage += calculateDailyWage(details.getWagePerHour(), details.getFullDayHours());
-                    // System.out.println("Wage of that day
-                    // :"+calculateDailyWage(details.getWagePerHour(),details.getFullDayHours()));
+                    System.out.println("Wage of that day : $"+calculateDailyWage(details.getWagePerHour(),details.getFullDayHours()));
                     break;
             }
-            System.out.println("\nTotal amount till the day :" + totalWage);
+           System.out.println("\nThe total amount till date for that employee : $"+totalWage);
         }
-        System.out.println("\nTOTAL AMOUNT OF "+details.getCompanyName()+" is "+totalWage);
+        System.out.println("\nTOTAL AMOUNT OF "+details.getCompanyName()+" is $"+totalWage);
         return totalWage;
     }
 
